@@ -3,11 +3,22 @@ const express = require('express');
 const config = require('../config.js');
 const app = express();
 
+const swaggerUi = require('swagger-ui-express');
+
+const bodyParser = require('body-parser');
+
 // Creamos el objeto user
 const user = require('./components/user/network');
 
+// bodyParser nos va a permitir trabajar con toda la data en JSON
+app.use(bodyParser.json());
+
+const swaggerDoc = require('./swagger.json');
+
 // Creamos una primera ruta
-app.use('/api/user', user)
+app.use('/api/user', user);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // Definimos ROUTER
 app.listen(config.api.port, () => {

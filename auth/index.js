@@ -17,6 +17,9 @@ const check = {
     console.log(decoded);
 
     // Comprobamos si es o no propio
+    if(decoded.id !== owner) {
+      throw new Error('No puedes hacer esto')
+    }
   },
 }
 
@@ -47,4 +50,5 @@ function decodeHeader(req) {
 
 module.exports = {
   sign,
+  check,
 };

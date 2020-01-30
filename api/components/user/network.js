@@ -1,19 +1,19 @@
 // Aquí vamos a tener toda la parte de red de nuestro componente user
 const express = require('express');
-
+// Importamos el middleware
+const secure = require('./secure');
 // Vamos a importar response.js
 const response = require('../../../network/response');
-
 // Importamos nuestro controlador
 const Controller = require('./index');
 
-const router = express.Router();
 
+const router = express.Router();
 // Routes
 router.get('/', list);
 router.get('/:id', get);
 router.post('/', upsert);
-router.put('/', upsert);
+router.put('/', secure('update'), upsert);
 
 function list(req, res) {
   Controller.list()

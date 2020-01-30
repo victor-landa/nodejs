@@ -3,7 +3,8 @@
 
 // Aquí vamos a tener la base de datos por defecto 
 // que queramos setear en nuestro controlador.
-const store = require('../../../store/dummy');
+// const store = require('../../../store/dummy');
+const store = require('../../../store/mysql');
 
 // Esto nos va a traer el controlador.
 const ctrl = require('./controller');

@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+
+const error = require('../utils/error');
+
 const secret = config.jwt.secret;
 
 // Creamos el primer token
@@ -18,19 +21,19 @@ const check = {
 
     // Comprobamos si es o no propio
     if(decoded.id !== owner) {
-      throw new Error('No puedes hacer esto')
+      throw error('No puedes hacer esto', 401);
     }
   },
 }
 
 function getToken(auth) {
   if(!auth) {
-    throw new Error('No viene el token');
+    throw error('No viene el token', 401);
   }
 
   // Aquí nos vamos a asegurar de que el formato del token sea el correcto.
   if(auth.indexOf('Bearer ') === -1) {
-    throw new Error('Formato inválido');
+    throw error('Formato inválido', 401);
   }
 
   let token = auth.replace('Bearer ', '');
